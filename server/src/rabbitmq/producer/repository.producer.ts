@@ -3,10 +3,10 @@ import * as amqp from 'amqplib';
 
 @Injectable()
 export class ProducerService {
-  private readonly queueName = 'repository_import';
+  private readonly queueName = process.env.RABBITMQ_QUEUE;
 
   async sendToQueue(message: any): Promise<void> {
-    const connection = await amqp.connect('amqp://rabbitmq');
+    const connection = await amqp.connect(process.env.RABBITMQ_HOST);
     const channel = await connection.createChannel();
 
     await channel.assertQueue(this.queueName, { durable: true });

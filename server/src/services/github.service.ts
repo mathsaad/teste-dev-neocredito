@@ -3,7 +3,7 @@ import axios from 'axios';
 
 @Injectable()
 export class GitHubService {
-  private readonly githubApiUrl = 'https://api.github.com';
+  private readonly githubApiUrl = process.env.GITHUB_API;
 
   async getRepositories(username: string): Promise<any[]> {
     try {

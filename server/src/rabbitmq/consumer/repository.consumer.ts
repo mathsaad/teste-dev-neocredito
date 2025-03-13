@@ -5,7 +5,7 @@ import { WebSocketService } from '../../services/websocket.service';
 
 @Injectable()
 export class ConsumerService implements OnModuleInit {
-  private readonly queueName = 'repository_import';
+  private readonly queueName = process.env.RABBITMQ_QUEUE;
 
   constructor(
     private readonly repositoryService: RepositoryService,
@@ -13,7 +13,7 @@ export class ConsumerService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    const connection = await amqp.connect('amqp://rabbitmq');
+    const connection = await amqp.connect(process.env.RABBITMQ_HOST);
     const channel = await connection.createChannel();
 
     await channel.assertQueue(this.queueName, { durable: true });

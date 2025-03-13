@@ -35,7 +35,11 @@ DB_USER=root
 DB_PASSWORD=password
 DB_NAME=github_repos
 
+RABBITMQ_QUEUE=repository_import
+RABBITMQ_HOST=amqp://rabbitmq
+
 GITHUB_TOKEN=TokenGithub
+GITHUB_API=https://api.github.com
 ```
 
 para gerar o token do github acesse: https://github.com/settings/tokens
